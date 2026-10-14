@@ -1,0 +1,11 @@
+1. Create project documentation
+2. Implement task tracking functionality
+3. Test the Student Task Tracker
+4. Add task priority levels
+
+Priority Levels
+---------------
+High: Create project documentation
+High: Implement task tracking functionality
+Medium: Test the Student Task Tracker
+Low: Add task priority levels
