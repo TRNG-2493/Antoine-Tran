@@ -253,34 +253,50 @@ class Reporter:
 
     def __init__(self, suite):
         # TODO 3.1: suite must be a Suite (else TypeError); store it as self.suite
-        raise NotImplementedError("TODO 3.1: Reporter.__init__")
+        
+        if not isinstance(suite, Suite):
+            raise TypeError("Suite must be a Suite object.")
+
+        self.suite = suite
 
     @staticmethod
     def pad(text, width):
         # TODO 3.2: str(text) left-justified in `width` characters. Never cut text.
-        raise NotImplementedError("TODO 3.2: pad")
+        return str(text).ljust(width)
 
     @staticmethod
     def format_percent(value):
         # TODO 3.2: 66.666 -> "66.7%"
-        raise NotImplementedError("TODO 3.2: format_percent")
+        return f"{value:.1f}%"
 
     def render(self):
         # TODO 3.3: the base class has no format: raise NotImplementedError with a
         #           helpful message naming the class (type(self).__name__)
-        pass
+        raise NotImplementedError(f"{type(self).__name__} must implement render")
 
     def line_count(self):
         # TODO 3.4: number of lines in self.render(). Write it ONCE here;
         #           subclasses inherit it.
-        raise NotImplementedError("TODO 3.4: line_count")
+        return len(self.render().splitlines())
 
 
 class TextReporter(Reporter):
     def render(self):
         # TODO 3.5: see README for the exact layout (header, one row per result,
         #           "Pass rate: 50.0%"). Use self.pad and self.format_percent.
-        raise NotImplementedError("TODO 3.5: TextReporter.render")
+        
+        lines = [f"=== {self.suite.name} ==="]
+
+        for result in self.suite.results:
+            test_id = self.pad(result.test_id, 8)
+            status = self.pad(result.status, 9)
+            duration = f"{result.duration:>5.1f}s"
+            
+            lines.append(f"{test_id}{status}{duration}")
+        
+        lines.append(f"Pass rate: {self.format_percent(self.suite.pass_rate)}")
+
+        return "\n".join(lines)
 
 
 class CsvReporter(Reporter):
@@ -289,11 +305,22 @@ class CsvReporter(Reporter):
     @staticmethod
     def clean_cell(text):
         # TODO 3.6: commas -> ";" and newlines -> " " so one cell stays one cell
-        raise NotImplementedError("TODO 3.6: clean_cell")
+        
+        cleaned = str(text).replace(",", ";")
+        cleaned = cleaned.replace("\n", " ")
 
+        return cleaned
+    
     def render(self):
         # TODO 3.6: see README for the exact layout
-        raise NotImplementedError("TODO 3.6: CsvReporter.render")
+        
+        lines = [self.HEADER]
 
+        for result in self.suite.results:
+            line = f"{result.test_id}," f"{result.status}," f"{result.duration:.1f}," f"{self.clean_cell(result.message)}"
+
+            lines.append(line)
+
+        return "\n".join(lines)
 
 # STRETCH 1: add class MarkdownReporter(Reporter) here (see README).
