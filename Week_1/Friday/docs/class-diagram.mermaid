@@ -1,0 +1,111 @@
+classDiagram
+    direction LR
+    %% BLANK TEMPLATE - sketch on paper FIRST, then fill this in.
+    %% Save your finished copy as docs/class-diagram.mermaid in your repo
+    %% and preview it (VS Code Mermaid preview, https://mermaid.live, or GitHub).
+    %%
+    %% Notation cheat sheet
+    %%   +name   public      -name   internal (_name in Python)
+    %%   name$   class-level (class variable / @classmethod / @staticmethod)
+    %%   Child --|> Parent        inheritance ("is-a")
+    %%   Whole o-- "0..*" Part    composition-style "has-a, many"
+    %%   A --> B                  "uses"
+    %%
+    %% Mark every member as one of: instance attribute, property, class variable,
+    %% @classmethod, @staticmethod, normal method (use a note or a comment).
+
+    class TestResult {
+        +VALID_STATUSES$
+        +total_created$
+        
+        -_test_id
+        -_status
+        -_duration
+        +message
+        
+        +test_id
+        +status
+        +duration
+        +is_passed
+        
+        +is_valid_id(x)$
+        +how_many()$
+        +from_dict(data)$
+        +from_csv_line(line)$
+        +__str__()
+        +__repr__()
+    }
+
+    %% C = class variables: VALID_STATUSES, total_created
+    %% _ = internal attributes: _test_id, _status, _duration
+    %% P = properties: test_id, status, duration, is_passed
+    %% K = classmethods: how_many, from_dict, from_csv_line
+    %% S = staticmethod: is_valid_id
+    %% Instance attribute: message
+    %% Normal methods: __str__, __repr__
+
+    
+    class Suite {
+        +name
+        -_results
+
+        +results
+        +pass_rate
+        +total_duration
+
+        +from_rows(name, rows)$
+        +add(result)
+        +count()
+        +counts_by_status()
+        +failures()
+        +slowest(n)
+    }
+
+    %% Suite instance attributes: name, _results
+    %% Suite properties: results, pass_rate, total_duration
+    %% Suite classmethod: from_rows
+    %% Suite normal methods: add, count, counts_by_status, failures, slowest
+
+    class Reporter {
+        +suite
+
+        +pad(text, width)$
+        +format_percent(value)$
+
+        +render()
+        +line_count()
+    }
+
+    %% Reporter instance attribute: suite
+    %% Reporter staticmethods: pad, format_percent
+    %% Reporter normal methods: render, line_count
+    %% Subclasses must override render
+
+    %% TODO: add the subclasses of Reporter (TextReporter, CsvReporter, ...)
+
+    class TextReporter {
+        +render()
+    }
+
+    class CsvReporter {
+        +render()
+        +clean_cell(text)$
+    }
+
+    %% TextReporter normal method: render
+    %% CsvReporter normal method: render
+    %% CsvReporter staticmethod: clean_cell
+
+
+    %% TODO: add the relationship lines (inheritance, has-a, uses)
+
+    TextReporter --|> Reporter
+    CsvReporter --|> Reporter
+
+    Suite o-- "0..*" TestResult : contains
+    Reporter --> Suite : uses
+
+
+    %% TODO: add a note for the one thing you are least sure about
+    %% Design note: I am still learning when to use classmethods versus staticmethods.
+
