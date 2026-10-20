@@ -1,0 +1,39 @@
+*   409421c Merge pull request #1 from TRNG-2493/feature/week1-summary
+|\  
+| *   f5f5156 Merge branch 'main' into feature/week1-summary
+| |\  
+| |/  
+|/|   
+* | 16f96c9 Create README.md for Revature training program
+* | f3a125f Revise Week 1 README for Revature Training
+| * ff9bfab Add checker-output full output as a txt file
+| * 4f0ddd7 Complete Week 1 README and update Git ignore rules
+| * b03eedf Complete report driver with validation and polymorphism
+| * 079bb6c Add Reporter Hierarchy with test and CSV output
+| * 7176c02 Add Suite with pass rate and failure
+| * 2bd22d9 Add TestResult with validation and alternative constructors
+|/  
+* 3201665 Create README.md
+* 0559e53 Delete Week_1/Friday/README.md
+*   0329b2d Merge branch 'main' of https://github.com/TRNG-2493/Antoine-Tran
+|\  
+| * f67b039 Update README to clarify repository link wording
+* | f68effa Create README.md
+|/  
+*   9064e36 Merge branch 'main' of https://github.com/TRNG-2493/Antoine-Tran
+|\  
+| * 9b729be Update README with repository link
+| * 03b0862 Revise README with repository and PR information
+| * 274e84c Add original repo link to README
+* | 67e3a6d Add Pair Project README with Shared GitHub Repo Link
+|/  
+* 57753e5 Add Wednesday Test Data Manager Exercise (Wednesday)
+* bb56165 Add Monday Student Task Tracker Exercise
+* cbbaffe Delete Week_1/Monday/test-data-manager directory
+* edcf955 Delete Week_1/Monday/COMMANDS.md
+* 3fda23c Files uploaded for day 1 exercises
+* 1147208 Add Tuesday Python and Git Exercise
+* 8b27ec4 test-data-manager files
+* 61c7bb4 test case id formatter files
+* 683339a Add Git lab command reference and ignore practice repositories
+* a9d8ad5 test-case id formatter exercise completed
