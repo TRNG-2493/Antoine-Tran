@@ -6,3 +6,6 @@
 
 __pycache__/
 *.pyc
+# Python virtual environments and test caches
+.venv/
+.pytest_cache/
