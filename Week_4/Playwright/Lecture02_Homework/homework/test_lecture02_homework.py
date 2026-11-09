@@ -1,7 +1,7 @@
 from pathlib import Path
 
-import pytest
-from playwright.sync_api import Page, expect
+import pytest # type: ignore
+from playwright.sync_api import Page, expect # type: ignore
 
 PRACTICE_PAGE = Path(__file__).parent / "locators_practice.html"
 
